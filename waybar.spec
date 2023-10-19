@@ -31,6 +31,8 @@ BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  portaudio-devel
 BuildRequires:  portaudio
+BuildRequires:  libsoundio-devel
+BuildRequires:  libsoundio
 
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(catch2)
