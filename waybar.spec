@@ -80,7 +80,7 @@ Recommends:     cava
     --force-fallback-for=cava \
     --wrap-mode=default \
     -Dcava=enabled  \
-    -Dsndio=disabled
+    -Dsndio=enabled
 %meson_build
 
 %install
