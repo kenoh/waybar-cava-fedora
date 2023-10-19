@@ -25,7 +25,14 @@ BuildRequires:  meson >= 0.50.0
 BuildRequires:  scdoc
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  cava
+BuildRequires:  iniparser-devel
+BuildRequires:  fftw-devel
+BuildRequires:  pulseaudio-libs-devel
+BuildRequires:  alsa-lib-devel
+BuildRequires:  portaudio-devel
+BuildRequires:  portaudio
 
+BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(catch2)
 BuildRequires:  pkgconfig(date)
 BuildRequires:  pkgconfig(dbusmenu-gtk3-0.4)
