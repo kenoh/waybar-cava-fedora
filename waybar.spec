@@ -104,7 +104,7 @@ Recommends:     cava
 %license LICENSE
 %doc README.md
 %dir %{_sysconfdir}/xdg/%{name}
-%config(noreplace) %{_sysconfdir}/xdg/%{name}/config
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/config.jsonc
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/style.css
 %{_libdir}/libcava.so
 %{_libdir}/pkgconfig/cava.pc
