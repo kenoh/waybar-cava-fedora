@@ -61,6 +61,7 @@ BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
+BuildRequires:  pkgconfig(libpipewire-0.3)
 %if %{with wireplumber}
 BuildRequires:  pkgconfig(wireplumber-0.4)
 %endif
@@ -78,6 +79,8 @@ Recommends:     cava
 %{summary}.
 
 %prep
+# Disable chrono Time Zone extensions (P0355R7) support
+# sed -i 's/^\(have_chrono_timezones =\).*/\1 false/' meson.build
 %autosetup -p1 -n Waybar-%{version}
 
 %build
@@ -86,8 +89,9 @@ Recommends:     cava
     --wrap-mode=default \
     -Dcava=enabled  \
     -Dsndio=disabled \
-    -Dcava:input_sndio=disabled  \ 
-    %{!?with_wireplumber:-Dwireplumber=disabled}
+    -Dcava:input_sndio=disabled \
+    -Dwireplumber=disabled
+#    %{!?with_wireplumber:-Dwireplumber=disabled}
 %meson_build
 
 %install
