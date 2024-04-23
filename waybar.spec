@@ -61,9 +61,7 @@ BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
-%if %{with wireplumber}
 BuildRequires:  pkgconfig(wireplumber-0.4)
-%endif
 BuildRequires:  pkgconfig(xkbregistry)
 
 Conflicts:      waybar
@@ -86,8 +84,7 @@ Recommends:     cava
     --wrap-mode=default \
     -Dcava=enabled  \
     -Dsndio=disabled \
-    -Dcava:input_sndio=disabled \
-    %{!?with_wireplumber:-Dwireplumber=disabled}
+    -Dcava:input_sndio=disabled 
 %meson_build
 
 %install
