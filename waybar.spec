@@ -4,7 +4,7 @@
 %define _unpackaged_files_terminate_build 0
 
 Name:           waybar
-Version:        0.10.1
+Version:        0.10.3
 Release:        1%{?dist}
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors
 # Source files/overall project licensed as MIT, but
