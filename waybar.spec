@@ -5,7 +5,7 @@
 
 Name:           waybar
 Version:        0.11.0
-Release:        1%{?dist}
+Release:        1%{?dist}-1
 Summary:        Highly customizable Wayland bar for Sway and Wlroots based compositors
 # Source files/overall project licensed as MIT, but
 # - BSL-1.0
@@ -21,6 +21,8 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch:          https://github.com/Alexays/Waybar/commit/0d02f6877d88551ea2be0cd151c1e6354e208b1c.patch
+
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
