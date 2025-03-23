@@ -75,7 +75,6 @@ Provides:       waybar
 Enhances:       sway
 Enhances:       hyprland
 Recommends:     (font(fontawesome6free) or font(fontawesome5free))
-Recommends:     cava
 
 %description
 %{summary}.
@@ -87,18 +86,16 @@ Recommends:     cava
 
 %build
 %meson_wrap \
-    --force-fallback-for=cava,sndio \
+    --force-fallback-for=sndio \
     --wrap-mode=default \
-    -Dcava=enabled  \
     -Dsndio=disabled \
-    -Dcava:input_sndio=disabled \
     %{!?with_wireplumber:-Dwireplumber=disabled}
 %meson_build
 
 %install
 %meson_install
 # remove man pages for disabled modules
-for module in cava sndio %{!?with_wireplumber:wireplumber} wlr-workspaces; do
+for module in sndio %{!?with_wireplumber:wireplumber} wlr-workspaces; do
     rm -f %{buildroot}%{_mandir}/man5/%{name}-${module}.5
 done
 
@@ -118,8 +115,6 @@ done
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/config.jsonc
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/style.css
-%{_libdir}/libcava.so
-%{_libdir}/pkgconfig/cava.pc
 %{_bindir}/%{name}
 %{_mandir}/man5/%{name}*
 %{_userunitdir}/%{name}.service
