@@ -21,7 +21,7 @@ Summary:        Highly customizable Wayland bar for Sway and Wlroots based compo
 License:        MIT AND BSL-1.0 AND ISC
 URL:            https://github.com/Alexays/Waybar
 Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch:          https://github.com/Alexays/Waybar/commit/0d02f6877d88551ea2be0cd151c1e6354e208b1c.patch
+#Patch:          https://github.com/Alexays/Waybar/commit/0d02f6877d88551ea2be0cd151c1e6354e208b1c.patch
 
 
 BuildRequires:  gcc
@@ -92,8 +92,7 @@ Recommends:     cava
     -Dcava=enabled  \
     -Dsndio=disabled \
     -Dcava:input_sndio=disabled \
-    -Dwireplumber=disabled
-#    %{!?with_wireplumber:-Dwireplumber=disabled}
+    %{!?with_wireplumber:-Dwireplumber=disabled}
 %meson_build
 
 %install
