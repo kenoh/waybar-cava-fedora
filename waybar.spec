@@ -1,7 +1,7 @@
 %global meson_wrap CFLAGS="${CFLAGS:--O2 -flto=false -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64  -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer }" ; export CFLAGS ; CXXFLAGS="${CXXFLAGS:--O2 -flto=false -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64  -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer }" ; export CXXFLAGS ; FFLAGS="${FFLAGS:--O2 -flto=false -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64  -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -I/usr/lib64/gfortran/modules }" ; export FFLAGS ; FCFLAGS="${FCFLAGS:--O2 -flto=disabled -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64  -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -I/usr/lib64/gfortran/modules }" ; export FCFLAGS ; VALAFLAGS="${VALAFLAGS:--g}" ; export VALAFLAGS ; LDFLAGS="${LDFLAGS:--Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -Wl,--build-id=sha1  }" ; export LDFLAGS ; LT_SYS_LIBRARY_PATH="${LT_SYS_LIBRARY_PATH:-/usr/lib64:}" ; export LT_SYS_LIBRARY_PATH ; CC="${CC:-gcc}" ; export CC ; CXX="${CXX:-g++}" ; export CXX; /usr/bin/meson setup --buildtype=plain --prefix=/usr --libdir=/usr/lib64 --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc --localstatedir=/var --sharedstatedir=/var/lib --wrap-mode=default --auto-features=enabled . redhat-linux-build
 
 %define _lto_cflags %{nil}
-%define _unpackaged_files_terminate_build 0
+#%define _unpackaged_files_terminate_build 0
 
 Name:           waybar
 Version:        0.12.0
@@ -64,9 +64,7 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-protocols)
 BuildRequires:  pkgconfig(libpipewire-0.3)
-%if %{with wireplumber}
-BuildRequires:  pkgconfig(wireplumber-0.4)
-%endif
+BuildRequires:  pkgconfig(wireplumber-0.5)
 BuildRequires:  pkgconfig(xkbregistry)
 
 Conflicts:      waybar
@@ -89,13 +87,13 @@ Recommends:     (font(fontawesome6free) or font(fontawesome5free))
     --force-fallback-for=sndio \
     --wrap-mode=default \
     -Dsndio=disabled \
-    %{!?with_wireplumber:-Dwireplumber=disabled}
+    -Dcava=disabled \
 %meson_build
 
 %install
 %meson_install
 # remove man pages for disabled modules
-for module in sndio %{!?with_wireplumber:wireplumber} wlr-workspaces; do
+for module in sndio wlr-workspaces; do
     rm -f %{buildroot}%{_mandir}/man5/%{name}-${module}.5
 done
 
